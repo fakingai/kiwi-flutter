@@ -1,0 +1,222 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8f9fb;}
+        ::-webkit-scrollbar { display: none;}
+    </style>
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" /><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&amp;display=swap" /><style>
+  .highlighted-section {
+    outline: 2px solid #3F20FB;
+    background-color: rgba(63, 32, 251, 0.1);
+  }
+
+  .edit-button {
+    position: absolute;
+    z-index: 1000;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  html, body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  </style></head>
+<body class="bg-[#f8f9fb]">
+    <div id="ragpro-root" class="flex min-h-[900px] w-full">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="flex flex-col bg-white border-r border-gray-200 w-[320px] min-w-[260px] max-w-[350px] h-[900px] px-6 py-7 transition-all duration-200">
+            <div class="flex items-center mb-10">
+                <div class="flex-shrink-0 w-10 h-10 bg-[#3A5AFF] rounded-xl flex items-center justify-center text-white text-2xl font-bold mr-3 select-none">R</div>
+                <span class="text-2xl font-semibold text-gray-900 tracking-tight">RAG Pro</span>
+            </div>
+            <nav id="sidebar-nav" class="flex flex-col gap-2">
+                <button class="flex items-center px-4 py-3 rounded-lg gap-3 text-base font-medium bg-[#f2f4fa] text-[#3A5AFF] hover:bg-[#e5e8f7] transition" id="nav-new-chat">
+                    <i class="fa-solid fa-plus text-lg"></i>
+                    New Chat
+                </button>
+                <div class="mt-6 mb-2 flex items-center justify-between">
+                    <span class="text-xs uppercase tracking-wide text-gray-400 font-semibold">Projects</span>
+                    <button class="text-gray-400 hover:text-[#3A5AFF] transition" title="Add Project">
+                        <i class="fa-solid fa-folder-plus"></i>
+                    </button>
+                </div>
+                <div id="sidebar-projects-list" class="flex flex-col gap-1 mb-6">
+                    <div id="project-card-1" class="flex items-center px-3 py-2 rounded-md bg-[#f8faff] hover:bg-[#eef0fb] cursor-pointer transition gap-2">
+                        <i class="fa-solid fa-folder-closed text-[#3A5AFF]"></i>
+                        <span class="text-sm font-medium text-gray-800 flex-1 truncate">Website Redesign</span>
+                        <i class="fa-solid fa-chevron-right text-xs text-gray-400"></i>
+                    </div>
+                    <div id="project-card-2" class="flex items-center px-3 py-2 rounded-md hover:bg-[#f2f4fa] cursor-pointer transition gap-2">
+                        <i class="fa-regular fa-folder text-[#8e99b3]"></i>
+                        <span class="text-sm font-medium text-gray-800 flex-1 truncate">Content Automation</span>
+                        <i class="fa-solid fa-chevron-right text-xs text-gray-400"></i>
+                    </div>
+                </div>
+                <div class="mb-2 flex items-center justify-between">
+                    <span class="text-xs uppercase tracking-wide text-gray-400 font-semibold">Recent Chats</span>
+                    <button class="text-gray-400 hover:text-[#3A5AFF] transition" title="Refresh">
+                        <i class="fa-solid fa-rotate-right"></i>
+                    </button>
+                </div>
+                <div id="sidebar-recent-chats" class="flex flex-col gap-1">
+                    <div id="recent-chat-card-1" class="flex items-center px-3 py-2 rounded-md hover:bg-[#f2f4fa] cursor-pointer transition gap-2">
+                        <i class="fa-regular fa-message text-[#3A5AFF]"></i>
+                        <span class="text-sm font-medium text-gray-700 flex-1 truncate">Fix deployment error</span>
+                        <span class="text-xs text-gray-400">2d</span>
+                    </div>
+                    <div id="recent-chat-card-2" class="flex items-center px-3 py-2 rounded-md hover:bg-[#f2f4fa] cursor-pointer transition gap-2">
+                        <i class="fa-regular fa-message text-[#8e99b3]"></i>
+                        <span class="text-sm font-medium text-gray-700 flex-1 truncate">Blog post draft</span>
+                        <span class="text-xs text-gray-400">5d</span>
+                    </div>
+                </div>
+            </nav>
+            <div class="mt-auto pt-8 flex items-center gap-3 border-t border-gray-100">
+                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" class="w-10 h-10 rounded-full object-cover" alt="User avatar" />
+                <div>
+                    <div class="text-sm font-semibold text-gray-800">Alex Mason</div>
+                    <div class="text-xs text-gray-400">alex@ragpro.com</div>
+                </div>
+                <button class="ml-auto text-gray-400 hover:text-[#3A5AFF] transition" title="Settings">
+                    <i class="fa-solid fa-gear"></i>
+                </button>
+            </div>
+        </aside>
+        <!-- Main Chat Area -->
+        <main id="main-chat-area" class="flex-1 flex flex-col h-[900px] relative">
+            <!-- Header (optional for mobile/tablet) -->
+            <header id="header" class="flex items-center justify-between px-10 py-6 border-b border-gray-100 bg-white">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl font-bold text-gray-900 tracking-tight">Welcome to RAG Pro</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button class="rounded-full bg-[#f2f4fa] p-3 text-gray-600 hover:bg-[#e5e8f7] transition" title="Notifications">
+                        <i class="fa-regular fa-bell text-lg"></i>
+                    </button>
+                    <button class="rounded-full bg-[#f2f4fa] p-3 text-gray-600 hover:bg-[#e5e8f7] transition" title="Help">
+                        <i class="fa-regular fa-circle-question text-lg"></i>
+                    </button>
+                </div>
+            </header>
+            <!-- Motivating Prompt -->
+            <section id="motivating-prompt" class="flex-1 flex flex-col justify-center items-center px-10">
+                <div class="max-w-2xl w-full text-center mb-14">
+                    <div class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Start an AI-powered conversation</div>
+                    <div class="text-lg text-gray-500 mb-6">Ask anything about shipping code, content creation, or problem-solving. Your history is saved for quick access, and you can switch between projects and chats anytime.</div>
+                    <div class="flex flex-row justify-center gap-4">
+                        <button class="bg-[#3A5AFF] hover:bg-[#2546b5] text-white font-semibold px-7 py-3 rounded-lg text-base shadow-md transition" id="prompt-new-chat-btn">
+                            <i class="fa-solid fa-plus mr-2"></i>New Chat
+                        </button>
+                        <button class="bg-white hover:bg-[#f2f4fa] text-[#3A5AFF] border border-[#dbe5fc] font-semibold px-7 py-3 rounded-lg text-base transition" id="prompt-view-projects-btn">
+                            <i class="fa-solid fa-folder-open mr-2"></i>View Projects
+                        </button>
+                    </div>
+                </div>
+                <!-- Example Cards -->
+                <div id="example-prompts" class="max-w-xl w-full flex flex-row flex-wrap justify-center gap-4">
+                    <div id="example-card-1" class="bg-white rounded-lg px-6 py-4 shadow-sm border border-gray-100 flex items-center gap-3 min-w-[220px] cursor-pointer hover:shadow-md transition">
+                        <i class="fa-solid fa-code text-[#3A5AFF] text-xl"></i>
+                        <span class="text-sm text-gray-800 font-medium">How do I fix a merge conflict in Git?</span>
+                    </div>
+                    <div id="example-card-2" class="bg-white rounded-lg px-6 py-4 shadow-sm border border-gray-100 flex items-center gap-3 min-w-[220px] cursor-pointer hover:shadow-md transition">
+                        <i class="fa-solid fa-pen-to-square text-[#3A5AFF] text-xl"></i>
+                        <span class="text-sm text-gray-800 font-medium">Write a product update for users</span>
+                    </div>
+                    <div id="example-card-3" class="bg-white rounded-lg px-6 py-4 shadow-sm border border-gray-100 flex items-center gap-3 min-w-[220px] cursor-pointer hover:shadow-md transition">
+                        <i class="fa-solid fa-lightbulb text-[#3A5AFF] text-xl"></i>
+                        <span class="text-sm text-gray-800 font-medium">Ideas for debugging a slow app</span>
+                    </div>
+                </div>
+            </section>
+            <!-- Chat History and Input -->
+            <section id="chat-section" class="flex flex-col justify-end relative flex-1 px-10 pb-7">
+                <div id="chat-history" class="flex flex-col gap-5 overflow-y-auto mb-6 max-h-[780px] pr-2">
+                    <div id="chat-bubble-user-1" class="flex w-full justify-end">
+                        <div class="max-w-lg w-fit bg-[#3A5AFF] text-white rounded-2xl px-6 py-4 text-base font-medium shadow-lg flex gap-2 items-start">
+                            <span>How do I fix a merge conflict in Git?</span>
+                            <span class="text-xs text-gray-200 self-end pl-3">You</span>
+                        </div>
+                    </div>
+                    <div id="chat-bubble-ai-1" class="flex w-full justify-start">
+                        <div class="max-w-lg w-fit bg-white border border-[#e6eaf6] text-gray-900 rounded-2xl px-6 py-4 text-base font-medium shadow flex gap-2 items-start">
+                            <i class="fa-solid fa-robot text-[#3A5AFF] text-lg mt-1"></i>
+                            <span>To resolve a merge conflict in Git:<br />
+                                1. Open the conflicted files and look for the <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> markers.<br />
+                                2. Edit the file to keep the desired changes.<br />
+                                3. Save the file, then run <code>git add &lt;filename&gt;</code>.<br />
+                                4. Commit the changes.<br />
+                                If you need step-by-step help, just ask!
+                            </span>
+                        </div>
+                    </div>
+                    <div id="chat-bubble-user-2" class="flex w-full justify-end">
+                        <div class="max-w-lg w-fit bg-[#3A5AFF] text-white rounded-2xl px-6 py-4 text-base font-medium shadow-lg flex gap-2 items-start">
+                            <span>Can you help me write a blog introduction?</span>
+                            <span class="text-xs text-gray-200 self-end pl-3">You</span>
+                        </div>
+                    </div>
+                    <div id="chat-bubble-ai-2" class="flex w-full justify-start">
+                        <div class="max-w-lg w-fit bg-white border border-[#e6eaf6] text-gray-900 rounded-2xl px-6 py-4 text-base font-medium shadow flex gap-2 items-start">
+                            <i class="fa-solid fa-robot text-[#3A5AFF] text-lg mt-1"></i>
+                            <span>Absolutely! Please tell me your blog topic and target audience, and I'll draft a compelling introduction for you.</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Input Toolbar -->
+                <div id="chat-input-toolbar" class="flex items-center bg-white rounded-[2rem] px-6 py-4 shadow-lg border border-[#e6eaf6] gap-3">
+                    <input id="chat-input" type="text" class="flex-1 outline-none bg-transparent text-base placeholder-gray-400 font-medium px-2" placeholder="Type your message and press Enter..." />
+                    <button class="text-white bg-[#3A5AFF] hover:bg-[#2546b5] rounded-full px-6 py-2 font-semibold text-base transition flex items-center gap-2 shadow-sm" id="send-btn">
+                        <span>Send</span>
+                        <i class="fa-solid fa-arrow-up ml-1"></i>
+                    </button>
+                </div>
+            </section>
+            <!-- Footer -->
+            <footer id="footer" class="w-full px-10 py-4 border-t border-gray-100 bg-white flex items-center justify-between">
+                <span class="text-xs text-gray-400">RAG Pro © 2024</span>
+                <div class="flex items-center gap-4">
+                    <span class="text-xs text-gray-400 hover:text-[#3A5AFF] transition cursor-pointer">Privacy Policy</span>
+                    <span class="text-xs text-gray-400 hover:text-[#3A5AFF] transition cursor-pointer">Terms</span>
+                </div>
+            </footer>
+        </main>
+    </div>
+    <script>
+        // Example: Show/hide chat section when starting a chat
+        document.getElementById("prompt-new-chat-btn").onclick = function() {
+            document.getElementById("motivating-prompt").classList.add('hidden');
+            document.getElementById("chat-section").classList.remove('hidden');
+        };
+        document.getElementById("nav-new-chat").onclick = function() {
+            document.getElementById("motivating-prompt").classList.add('hidden');
+            document.getElementById("chat-section").classList.remove('hidden');
+        };
+        // Example: Send button scrolls to bottom (dummy action)
+        document.getElementById("send-btn").onclick = function() {
+            const chatHistory = document.getElementById("chat-history");
+            setTimeout(() => { chatHistory.scrollTop = chatHistory.scrollHeight; }, 100);
+        };
+        // Example: Clicking example cards starts chat
+        document.getElementById("example-card-1").onclick = function() {
+            document.getElementById("motivating-prompt").classList.add('hidden');
+            document.getElementById("chat-section").classList.remove('hidden');
+        };
+        document.getElementById("example-card-2").onclick = function() {
+            document.getElementById("motivating-prompt").classList.add('hidden');
+            document.getElementById("chat-section").classList.remove('hidden');
+        };
+        document.getElementById("example-card-3").onclick = function() {
+            document.getElementById("motivating-prompt").classList.add('hidden');
+            document.getElementById("chat-section").classList.remove('hidden');
+        };
+    </script>
+
+</body></html>

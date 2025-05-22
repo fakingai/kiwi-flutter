@@ -1,0 +1,178 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        ::-webkit-scrollbar { display: none;}
+    </style>
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" /><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&amp;display=swap" /><style>
+  .highlighted-section {
+    outline: 2px solid #3F20FB;
+    background-color: rgba(63, 32, 251, 0.1);
+  }
+
+  .edit-button {
+    position: absolute;
+    z-index: 1000;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  html, body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  </style></head>
+<body class="bg-white text-gray-800 min-h-[900px]">
+
+    <div id="header" class="w-full flex items-center justify-between px-8 h-[64px] border-b border-gray-200 bg-white">
+        <div class="flex items-center space-x-2 text-[18px] font-medium text-gray-800">
+            <span class="mr-2 text-lg text-gray-700">Qa bot website</span>
+            <span class="text-gray-400">/</span>
+            <span class="ml-2 text-gray-700">Content Management</span>
+        </div>
+        <button class="flex items-center px-4 py-2 bg-gray-100 border border-gray-200 rounded-lg text-sm text-gray-700 hover:bg-gray-200 transition">
+            <i class="fa-solid fa-gear mr-2"></i>Settings
+        </button>
+    </div>
+
+    <main id="main-content" class="px-8 pt-6 pb-12">
+        <div id="toolbar-block" class="flex items-center justify-between mb-5">
+            <div id="tabs-section" class="flex space-x-2">
+                <button class="px-4 py-1.5 rounded-lg bg-gray-100 text-gray-800 border border-gray-200 font-medium text-sm shadow-sm focus:outline-none">All</button>
+                <button class="px-4 py-1.5 rounded-lg text-gray-500 border border-transparent font-medium text-sm hover:bg-gray-100 hover:text-gray-800 transition">Documents</button>
+                <button class="px-4 py-1.5 rounded-lg text-gray-500 border border-transparent font-medium text-sm hover:bg-gray-100 hover:text-gray-800 transition">Images</button>
+                <button class="px-4 py-1.5 rounded-lg text-gray-500 border border-transparent font-medium text-sm hover:bg-gray-100 hover:text-gray-800 transition">Code</button>
+            </div>
+            <div id="search-add-block" class="flex items-center space-x-3">
+                <div class="relative">
+                    <input class="bg-gray-100 border border-gray-200 rounded-lg pl-10 pr-3 py-2 text-sm text-gray-700 focus:outline-none focus:border-blue-500 placeholder:text-gray-400 w-[230px]" placeholder="Search content..." />
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-gray-400 text-sm"></i>
+                </div>
+                <button class="px-4 py-2 bg-blue-500 text-white font-medium rounded-lg text-sm hover:bg-blue-600 transition flex items-center">
+                    <i class="fa-solid fa-plus mr-2"></i>Add Content
+                </button>
+            </div>
+        </div>
+
+        <div id="table-block" class="w-full mt-2">
+            <div class="w-full grid grid-cols-12 text-gray-500 text-xs font-medium border-b border-gray-200 pb-2" style="letter-spacing:0.02em;">
+                <div class="col-span-4 pl-2">Name</div>
+                <div class="col-span-2">Type</div>
+                <div class="col-span-2">Last Updated</div>
+                <div class="col-span-1">Size</div>
+                <div class="col-span-3">Vectorization</div>
+            </div>
+            <div id="row-index-html" class="w-full grid grid-cols-12 items-center py-3 border-b border-gray-200 hover:bg-gray-50 transition group">
+                <div class="col-span-4 flex items-center pl-2 space-x-2">
+                    <i class="fa-solid fa-code text-yellow-400 text-base"></i>
+                    <span class="text-gray-800 font-medium text-sm">index.html</span>
+                </div>
+                <div class="col-span-2 text-gray-700 text-sm">Code</div>
+                <div class="col-span-2 text-gray-700 text-xs">2 hours ago</div>
+                <div class="col-span-1 text-gray-700 text-xs">12 KB</div>
+                <div class="col-span-3 flex items-center space-x-2">
+                    <i class="fa-regular fa-circle-check text-green-500"></i>
+                    <span class="text-green-500 text-sm font-medium">Completed</span>
+                </div>
+                <div class="col-span-12 flex justify-end pr-2 -mt-6">
+                    <i class="fa-solid fa-ellipsis-vertical text-white/30 hover:text-white/60 cursor-pointer text-lg"></i>
+                </div>
+            </div>
+            <div id="row-styles-css" class="w-full grid grid-cols-12 items-center py-3 border-b border-gray-200 hover:bg-gray-50 transition group">
+                <div class="col-span-4 flex items-center pl-2 space-x-2">
+                    <i class="fa-solid fa-code text-yellow-400 text-base"></i>
+                    <span class="text-gray-800 font-medium text-sm">styles.css</span>
+                </div>
+                <div class="col-span-2 text-gray-700 text-sm">Code</div>
+                <div class="col-span-2 text-gray-700 text-xs">2 hours ago</div>
+                <div class="col-span-1 text-gray-700 text-xs">4 KB</div>
+                <div class="col-span-3 flex items-center space-x-2">
+                    <i class="fa-regular fa-circle-check text-green-500"></i>
+                    <span class="text-green-500 text-sm font-medium">Completed</span>
+                </div>
+                <div class="col-span-12 flex justify-end pr-2 -mt-6">
+                    <i class="fa-solid fa-ellipsis-vertical text-white/30 hover:text-white/60 cursor-pointer text-lg"></i>
+                </div>
+            </div>
+            <div id="row-app-js" class="w-full grid grid-cols-12 items-center py-3 border-b border-gray-200 hover:bg-gray-50 transition group">
+                <div class="col-span-4 flex items-center pl-2 space-x-2">
+                    <i class="fa-solid fa-code text-yellow-400 text-base"></i>
+                    <span class="text-gray-800 font-medium text-sm">app.js</span>
+                </div>
+                <div class="col-span-2 text-gray-700 text-sm">Code</div>
+                <div class="col-span-2 text-gray-700 text-xs">3 hours ago</div>
+                <div class="col-span-1 text-gray-700 text-xs">8 KB</div>
+                <div class="col-span-3 flex items-center space-x-3">
+                    <div class="flex items-center">
+                        <i class="fa-solid fa-circle-notch fa-spin text-blue-400 mr-2"></i>
+                        <span class="text-blue-400 text-sm font-medium">In Progress</span>
+                        <div class="w-[60px] h-2 bg-[#23232b] rounded ml-3 overflow-hidden">
+                            <div class="bg-blue-500 h-2 rounded w-[65%]"></div>
+                        </div>
+                        <span class="ml-2 text-gray-600 text-xs">65%</span>
+                    </div>
+                </div>
+                <div class="col-span-12 flex justify-end pr-2 -mt-6">
+                    <i class="fa-solid fa-ellipsis-vertical text-white/30 hover:text-white/60 cursor-pointer text-lg"></i>
+                </div>
+            </div>
+            <div id="row-readme-md" class="w-full grid grid-cols-12 items-center py-3 border-b border-gray-200 hover:bg-gray-50 transition group">
+                <div class="col-span-4 flex items-center pl-2 space-x-2">
+                    <i class="fa-regular fa-file-lines text-blue-400 text-base"></i>
+                    <span class="text-gray-800 font-medium text-sm">README.md</span>
+                </div>
+                <div class="col-span-2 text-gray-700 text-sm">Document</div>
+                <div class="col-span-2 text-gray-700 text-xs">1 day ago</div>
+                <div class="col-span-1 text-gray-700 text-xs">2 KB</div>
+                <div class="col-span-3 flex items-center space-x-2">
+                    <i class="fa-regular fa-circle-check text-green-500"></i>
+                    <span class="text-green-500 text-sm font-medium">Completed</span>
+                </div>
+                <div class="col-span-12 flex justify-end pr-2 -mt-6">
+                    <i class="fa-solid fa-ellipsis-vertical text-white/30 hover:text-white/60 cursor-pointer text-lg"></i>
+                </div>
+            </div>
+            <div id="row-logo-png" class="w-full grid grid-cols-12 items-center py-3 border-b border-gray-200 hover:bg-gray-50 transition group">
+                <div class="col-span-4 flex items-center pl-2 space-x-2">
+                    <i class="fa-regular fa-image text-green-400 text-base"></i>
+                    <span class="text-gray-800 font-medium text-sm">logo.png</span>
+                </div>
+                <div class="col-span-2 text-gray-700 text-sm">Image</div>
+                <div class="col-span-2 text-gray-700 text-xs">5 days ago</div>
+                <div class="col-span-1 text-gray-700 text-xs">45 KB</div>
+                <div class="col-span-3 flex items-center space-x-2">
+                    <i class="fa-regular fa-clock text-white/40"></i>
+                    <span class="text-gray-500 text-sm font-medium">Pending</span>
+                </div>
+                <div class="col-span-12 flex justify-end pr-2 -mt-6">
+                    <i class="fa-solid fa-ellipsis-vertical text-white/30 hover:text-white/60 cursor-pointer text-lg"></i>
+                </div>
+            </div>
+            <div id="row-hero-image-jpg" class="w-full grid grid-cols-12 items-center py-3 border-b border-gray-200 hover:bg-gray-50 transition group">
+                <div class="col-span-4 flex items-center pl-2 space-x-2">
+                    <i class="fa-regular fa-image text-green-400 text-base"></i>
+                    <span class="text-gray-800 font-medium text-sm">hero-image.jpg</span>
+                </div>
+                <div class="col-span-2 text-gray-700 text-sm">Image</div>
+                <div class="col-span-2 text-gray-700 text-xs">5 days ago</div>
+                <div class="col-span-1 text-gray-700 text-xs">120 KB</div>
+                <div class="col-span-3 flex items-center space-x-2">
+                    <i class="fa-regular fa-circle-xmark text-red-500"></i>
+                    <span class="text-red-500 text-sm font-medium">Failed</span>
+                </div>
+                <div class="col-span-12 flex justify-end pr-2 -mt-6">
+                    <i class="fa-solid fa-ellipsis-vertical text-white/30 hover:text-white/60 cursor-pointer text-lg"></i>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+</body></html>

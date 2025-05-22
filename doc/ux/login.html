@@ -1,0 +1,139 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif;}
+        ::-webkit-scrollbar { display: none;}
+    </style>
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" /><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&amp;display=swap" /><style>
+  .highlighted-section {
+    outline: 2px solid #3F20FB;
+    background-color: rgba(63, 32, 251, 0.1);
+  }
+
+  .edit-button {
+    position: absolute;
+    z-index: 1000;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  html, body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  </style></head>
+<body class="bg-gradient-to-br from-blue-100 to-white min-h-[700px]">
+
+    <div id="login-register-main" class="flex flex-col min-h-[700px] justify-center items-center px-4">
+
+        <div id="login-register-card" class="w-full max-w-[370px] bg-white rounded-2xl shadow-xl py-8 px-5 flex flex-col items-center">
+            
+            <div id="logo-section" class="mb-6">
+                <div class="w-14 h-14 rounded-full bg-blue-600 flex items-center justify-center">
+                    <i class="fa-solid fa-building text-white text-2xl"></i>
+                </div>
+            </div>
+
+            <div id="tabs-section" class="w-full flex mb-7">
+                <button id="login-tab-btn" class="flex-1 text-center py-2 rounded-l-lg text-blue-700 font-semibold bg-blue-50 transition-colors" onclick="showTab('login')">登录</button>
+                <button id="register-tab-btn" class="flex-1 text-center py-2 rounded-r-lg text-gray-500 font-semibold bg-transparent transition-colors" onclick="showTab('register')">注册</button>
+            </div>
+
+            <div id="tab-content" class="w-full">
+                <!-- 登录 -->
+                <form id="login-form" class="flex flex-col gap-5 animate-fadeIn">
+                    <div class="flex flex-col gap-1">
+                        <label for="login-email" class="text-sm text-gray-700 font-medium mb-1">邮箱</label>
+                        <div class="relative">
+                            <i class="fa-regular fa-envelope absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                            <input id="login-email" type="email" placeholder="请输入企业邮箱" class="pl-10 pr-3 py-2 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none w-full text-base transition-all" />
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="login-password" class="text-sm text-gray-700 font-medium mb-1">密码</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                            <input id="login-password" type="password" placeholder="请输入密码" class="pl-10 pr-3 py-2 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none w-full text-base transition-all" />
+                            <button type="button" onclick="togglePwd('login-password', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"><i class="fa-regular fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <button type="submit" class="mt-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg py-3 text-base transition-colors shadow-md">登录</button>
+                </form>
+                <!-- 注册 -->
+                <form id="register-form" class="flex flex-col gap-5 hidden animate-fadeIn">
+                    <div class="flex flex-col gap-1">
+                        <label for="register-email" class="text-sm text-gray-700 font-medium mb-1">邮箱</label>
+                        <div class="relative">
+                            <i class="fa-regular fa-envelope absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                            <input id="register-email" type="email" placeholder="请输入企业邮箱" class="pl-10 pr-3 py-2 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none w-full text-base transition-all" />
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="register-password" class="text-sm text-gray-700 font-medium mb-1">密码</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                            <input id="register-password" type="password" placeholder="设置登录密码" class="pl-10 pr-3 py-2 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none w-full text-base transition-all" />
+                            <button type="button" onclick="togglePwd('register-password', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"><i class="fa-regular fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="register-password2" class="text-sm text-gray-700 font-medium mb-1">确认密码</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                            <input id="register-password2" type="password" placeholder="再次输入密码" class="pl-10 pr-3 py-2 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none w-full text-base transition-all" />
+                            <button type="button" onclick="togglePwd('register-password2', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"><i class="fa-regular fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <button type="submit" class="mt-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg py-3 text-base transition-colors shadow-md">注册</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="footer" class="w-full mt-8 flex flex-col items-center">
+            <div class="text-xs text-gray-400 mb-2">RAG服务 © 2025</div>
+        </div>
+    </div>
+
+<script>
+    function showTab(tab) {
+        const loginBtn = document.getElementById('login-tab-btn');
+        const registerBtn = document.getElementById('register-tab-btn');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+
+        if (tab === 'login') {
+            loginBtn.classList.add('bg-blue-50', 'text-blue-700');
+            loginBtn.classList.remove('bg-transparent', 'text-gray-500');
+            registerBtn.classList.add('bg-transparent', 'text-gray-500');
+            registerBtn.classList.remove('bg-blue-50', 'text-blue-700');
+            loginForm.classList.remove('hidden');
+            registerForm.classList.add('hidden');
+        } else {
+            registerBtn.classList.add('bg-blue-50', 'text-blue-700');
+            registerBtn.classList.remove('bg-transparent', 'text-gray-500');
+            loginBtn.classList.add('bg-transparent', 'text-gray-500');
+            loginBtn.classList.remove('bg-blue-50', 'text-blue-700');
+            registerForm.classList.remove('hidden');
+            loginForm.classList.add('hidden');
+        }
+    }
+    function togglePwd(id, btn) {
+        const input = document.getElementById(id);
+        if (input.type === 'password') {
+            input.type = 'text';
+            btn.innerHTML = '&lt;i class="fa-regular fa-eye-slash"&gt;&lt;/i&gt;';
+        } else {
+            input.type = 'password';
+            btn.innerHTML = '&lt;i class="fa-regular fa-eye"&gt;&lt;/i&gt;';
+        }
+    }
+</script>
+
+</body></html>

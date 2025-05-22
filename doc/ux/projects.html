@@ -1,0 +1,186 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #FFFFFF;}
+        .card-hover:hover {box-shadow: 0 4px 28px 0 rgba(51,153,255,0.15);}
+        .card-hover:hover .edit-icon {opacity: 1;}
+        .card-hover .edit-icon {opacity: 0; transition: opacity 0.2s;}
+        .card-hover:hover {background: #F5F9FF;}
+    </style>
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" /><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&amp;display=swap" /><style>
+  .highlighted-section {
+    outline: 2px solid #3F20FB;
+    background-color: rgba(63, 32, 251, 0.1);
+  }
+
+  .edit-button {
+    position: absolute;
+    z-index: 1000;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  html, body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  </style></head>
+<body class="bg-white min-h-[100vh] text-gray-800">
+    <div id="projects-dashboard-root" class="flex min-h-[100vh]">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-[300px] bg-gray-50 border-r border-gray-200 flex flex-col py-6 px-4 min-h-[100vh]">
+            <button class="h-12 text-white bg-[#3399FF] rounded-lg text-base font-semibold flex items-center justify-center mb-6">
+                <i class="fa-solid fa-plus mr-2 text-lg"></i> New Chat
+            </button>
+            <div class="flex items-center text-gray-600 text-sm mb-3">
+                <i class="fa-solid fa-angle-left mr-1"></i>
+                <span>Projects</span>
+            </div>
+            <div class="mt-2">
+                <div class="flex items-center gap-2 text-gray-600 uppercase text-xs font-semibold mb-2 tracking-widest">
+                    <i class="fa-regular fa-clock"></i>
+                    <span>Recent</span>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <div class="flex flex-col cursor-pointer">
+                        <span class="truncate text-gray-800 text-base">How to implement authenti...</span>
+                        <span class="text-xs text-gray-600 mt-0.5">2h ago</span>
+                    </div>
+                    <div class="flex flex-col cursor-pointer">
+                        <span class="truncate text-gray-800 text-base">Creating responsive layouts</span>
+                        <span class="text-xs text-gray-600 mt-0.5">5h ago</span>
+                    </div>
+                    <div class="flex flex-col cursor-pointer">
+                        <span class="truncate text-gray-800 text-base">API integration help</span>
+                        <span class="text-xs text-gray-600 mt-0.5">1d ago</span>
+                    </div>
+                    <div class="flex flex-col cursor-pointer">
+                        <span class="truncate text-gray-800 text-base">Debugging performance iss...</span>
+                        <span class="text-xs text-gray-600 mt-0.5">2d ago</span>
+                    </div>
+                    <div class="flex flex-col cursor-pointer">
+                        <span class="truncate text-gray-800 text-base">Deployment strategies</span>
+                        <span class="text-xs text-gray-600 mt-0.5">3d ago</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="main-content" class="flex-1 flex flex-col min-h-[100vh] bg-white px-8 py-8">
+            <!-- Header -->
+            <div id="header" class="mb-6 flex flex-col gap-2">
+                <h1 class="text-2xl font-bold text-gray-800">Projects Management Dashboard</h1>
+                <p class="text-gray-600 text-base">Central hub for managing your projects.</p>
+            </div>
+
+            <!-- Search -->
+            <div id="search-bar-block" class="mb-8">
+                <input type="text" placeholder="搜索项目..." class="w-full max-w-[420px] h-11 px-4 rounded-lg bg-gray-50 border border-gray-200 text-gray-800 placeholder-gray-400 focus:outline-none text-base" />
+            </div>
+
+            <!-- Projects Grid -->
+            <section id="projects-list-section" class="flex-1">
+                <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
+                    <!-- Project Cards with updated colors -->
+                    <div id="project-card-1" class="card-hover cursor-pointer bg-white rounded-[8px] shadow-sm transition-all duration-200 border border-gray-200 flex flex-col justify-between h-[120px] p-0 group">
+                        <div class="flex items-start justify-between px-4 pt-3 pb-0">
+                            <i class="fa-solid fa-pen-to-square text-[#BBBBBB] text-lg edit-icon transition-all duration-200"></i>
+                        </div>
+                        <div class="flex-1 px-4 py-2 flex flex-col justify-center">
+                            <div class="font-bold text-gray-800 text-[16px] mb-1">AI Chatbot Platform</div>
+                            <div class="text-gray-600 text-xs">15 Chats</div>
+                        </div>
+                        <div class="flex items-center justify-between px-4 pb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="inline-block w-2 h-2 rounded-full bg-[#3399FF]"></span>
+                                <span class="text-[#3399FF] text-xs font-semibold">lifecoder1988</span>
+                            </div>
+                            <span class="text-gray-600 text-xs">Updated 12 hours ago</span>
+                        </div>
+                    </div>
+                    <!-- Project Card 2 -->
+                    <div id="project-card-2" class="card-hover cursor-pointer bg-white rounded-[8px] shadow-sm transition-all duration-200 border border-gray-200 flex flex-col justify-between h-[120px] p-0 group">
+                        <div class="flex items-start justify-between px-4 pt-3 pb-0">
+                            <i class="fa-solid fa-pen-to-square text-[#BBBBBB] text-lg edit-icon transition-all duration-200"></i>
+                        </div>
+                        <div class="flex-1 px-4 py-2 flex flex-col justify-center">
+                            <div class="font-bold text-gray-800 text-[16px] mb-1">Marketing Automation</div>
+                            <div class="text-gray-600 text-xs">7 Chats</div>
+                        </div>
+                        <div class="flex items-center justify-between px-4 pb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="inline-block w-2 h-2 rounded-full bg-[#3399FF]"></span>
+                                <span class="text-[#3399FF] text-xs font-semibold">designrpro</span>
+                            </div>
+                            <span class="text-gray-600 text-xs">Updated 2 days ago</span>
+                        </div>
+                    </div>
+                    <!-- Project Card 3 -->
+                    <div id="project-card-3" class="card-hover cursor-pointer bg-white rounded-[8px] shadow-sm transition-all duration-200 border border-gray-200 flex flex-col justify-between h-[120px] p-0 group">
+                        <div class="flex items-start justify-between px-4 pt-3 pb-0">
+                            <i class="fa-solid fa-pen-to-square text-[#BBBBBB] text-lg edit-icon transition-all duration-200"></i>
+                        </div>
+                        <div class="flex-1 px-4 py-2 flex flex-col justify-center">
+                            <div class="font-bold text-gray-800 text-[16px] mb-1">E-commerce Dashboard</div>
+                            <div class="text-gray-600 text-xs">23 Chats</div>
+                        </div>
+                        <div class="flex items-center justify-between px-4 pb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="inline-block w-2 h-2 rounded-full bg-[#3399FF]"></span>
+                                <span class="text-[#3399FF] text-xs font-semibold">shopmaster</span>
+                            </div>
+                            <span class="text-gray-600 text-xs">Updated 5 days ago</span>
+                        </div>
+                    </div>
+                    <!-- New Project Card -->
+                    <div id="new-project-card" class="card-hover cursor-pointer bg-gray-50 border-2 border-dashed border-gray-200 rounded-[8px] flex flex-col items-center justify-center h-[120px] transition-all duration-200 group relative" onclick="openNewProjectModal()">
+                        <div class="flex flex-col items-center justify-center w-full h-full">
+                            <div class="flex items-center justify-center bg-gray-50 rounded-full w-9 h-9 mb-1">
+                                <i class="fa-solid fa-plus text-[#3399FF] text-lg"></i>
+                            </div>
+                            <span class="text-white mt-1 font-semibold text-base">New Project</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- New Project Modal -->
+    <div id="new-project-modal-bg" class="hidden fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center">
+        <div class="bg-white rounded-xl p-8 w-full max-w-[360px] shadow-xl border border-gray-200">
+            <h2 class="text-xl font-bold mb-4 text-white">新建项目</h2>
+            <form id="new-project-form" class="flex flex-col gap-4">
+                <input type="text" placeholder="项目名称" class="bg-[#121212] border border-[#363636] rounded-md px-4 py-2 text-white placeholder-[#888] focus:outline-none" required="" />
+                <input type="text" placeholder="描述 (可选)" class="bg-[#121212] border border-[#363636] rounded-md px-4 py-2 text-white placeholder-[#888] focus:outline-none" />
+                <div class="flex justify-end mt-2 gap-2">
+                    <button type="button" onclick="closeNewProjectModal()" class="px-4 py-2 rounded-md bg-[#1E4976] text-white">取消</button>
+                    <button type="submit" class="px-4 py-2 rounded-md bg-[#3399FF] text-white font-semibold">创建</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openNewProjectModal() {
+            document.getElementById('new-project-modal-bg').classList.remove('hidden');
+        }
+        function closeNewProjectModal() {
+            document.getElementById('new-project-modal-bg').classList.add('hidden');
+        }
+        document.getElementById('new-project-form').onsubmit = function(e) {
+            e.preventDefault();
+            closeNewProjectModal();
+            // Add logic to create new project
+        }
+    </script>
+
+</body></html>
