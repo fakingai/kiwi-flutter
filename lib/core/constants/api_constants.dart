@@ -8,7 +8,7 @@ class ApiConstants {
   ApiConstants._();
 
   /// API服务器基础URL
-  static const String BASE_URL = 'http://82.157.48.188:9999';
+  static const String BASE_URL = 'https://kiwi-api.baobaobao.online';
 
   /// API版本
   static const String API_VERSION = '/api';
