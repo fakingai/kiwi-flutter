@@ -40,7 +40,8 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
-          channel: 'stable' 
+          channel: 'stable'
+          flutter-version: 3.29.3
 
       - name: Install macOS dependencies
         if: matrix.platform == 'macOS'
