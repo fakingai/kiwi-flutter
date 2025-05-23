@@ -70,7 +70,7 @@ jobs:
 
       - name: Build for ${{ matrix.platform }}
         run: |
-          flutter build ${{ matrix.platform == 'Android' && 'apk' || matrix.platform == 'Web' && 'web' || matrix.platform == 'macOS' && 'macos' || 'windows' }} --release
+          flutter build ${{ matrix.platform == 'Android' && 'apk' || matrix.platform == 'Web' && 'web' || matrix.platform == 'macOS' && 'macos' || 'windows' }} --release ${{ matrix.platform == 'Web' && '--pwa-strategy=none'}}
 
       - name: Archive Artifact for Android
         if: matrix.platform == 'Android'

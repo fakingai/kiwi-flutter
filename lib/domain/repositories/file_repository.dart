@@ -1,4 +1,5 @@
-import 'dart:io';
+import 'package:file_picker/file_picker.dart';
+
 import '../entities/file_entity.dart';
 
 /// 文件仓库接口，定义文件相关数据操作
@@ -14,7 +15,7 @@ abstract class FileRepository {
   ///
   /// 返回的 Stream<double> 表示上传进度 (0.0~1.0)
   Stream<double> uploadFile({
-    required File localFile,
+    required PlatformFile localFile,
     required int projectId,
     required String fileName,
   });

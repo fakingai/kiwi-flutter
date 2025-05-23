@@ -77,7 +77,7 @@ class FileViewModel extends ChangeNotifier {
           notifyListeners();
           try {
             await for (final progress in fileRepository.uploadFile(
-              localFile: File(f.path!),
+              localFile: f,
               projectId: projectId,
               fileName: f.name,
             )) {

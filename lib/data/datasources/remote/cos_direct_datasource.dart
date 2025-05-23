@@ -1,6 +1,9 @@
 import 'dart:io';
 import 'dart:math';
+import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:kiwi/core/utils/logger.dart';
 import 'package:kiwi/core/utils/cos_signature_util.dart';
 import 'package:kiwi/domain/entities/cos_credentials_entity.dart';
@@ -18,7 +21,7 @@ class CosDirectDatasource {
   /// [onProgress] 上传进度回调 (0.0~1.0)
   Future<CosUploadResultEntity> uploadFile({
     required CosCredentialsEntity credentials,
-    required File localFile,
+    required PlatformFile localFile,
     required String cosPath,
     required void Function(double progress) onProgress,
   }) async {
@@ -35,8 +38,8 @@ class CosDirectDatasource {
       final url = credentials.host + normalizedCosPath;
 
       // 获取文件信息
-      final fileSize = await localFile.length();
-      final contentType = _getContentType(localFile.path);
+      final fileSize = localFile.size;
+      final contentType = _getContentType(localFile.name);
 
       // 构建自定义请求头
       final customHeaders = {'Content-Type': contentType};
@@ -67,12 +70,46 @@ class CosDirectDatasource {
       AppLogger.info(
         '开始上传文件到 COS: $normalizedCosPath (大小: ${_formatFileSize(fileSize)})',
       );
+
       AppLogger.debug('上传URL: $url');
 
-      // 执行上传，使用文件流作为数据
+      // 准备上传数据
+      dynamic uploadData;
+
+      if (localFile.readStream == null &&
+          localFile.bytes == null &&
+          localFile.path != null) {
+        if (localFile.path!.startsWith('data:')) {
+          // 解析 data URL
+          final dataUrl = localFile.path!;
+          final isBase64 = dataUrl.contains('base64');
+
+          if (isBase64) {
+            // 分离数据部分和头部
+            final commaIndex = dataUrl.indexOf(',');
+            if (commaIndex != -1) {
+              final base64Data = dataUrl.substring(commaIndex + 1);
+              // 将base64转换为Uint8List
+              final bytes = base64Decode(base64Data);
+              uploadData = bytes;
+              AppLogger.debug('Web平台：已从base64解析文件数据，大小: ${bytes.length} bytes');
+            } else {
+              throw Exception('无法解析base64数据URL');
+            }
+          } else {
+            throw Exception('不支持非base64编码的数据URL');
+          }
+        } else {
+          // 读取本地文件
+          final file = File(localFile.path!);
+          uploadData = file.openRead();
+        }
+      }
+
+      // 执行上传
       final response = await dio.put(
         url,
-        data: localFile.openRead(),
+        data: localFile.readStream ?? localFile.bytes ?? uploadData,
         options: options,
         onSendProgress: (count, total) {
           if (total > 0) {
@@ -89,7 +126,13 @@ class CosDirectDatasource {
 
       // 检查响应
       if (response.statusCode == 200) {
-        final etag = response.headers.value('ETag');
+        String? etag = response.headers.value('ETag');
+        if (etag != null &&
+            etag.startsWith('"') &&
+            etag.endsWith('"') &&
+            etag.length >= 2) {
+          etag = etag.substring(1, etag.length - 1);
+        }
         AppLogger.info('COS 上传成功: $normalizedCosPath, ETag: ${etag ?? "未知"}');
         return CosUploadResultEntity(
           etag: etag ?? '',

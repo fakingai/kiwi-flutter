@@ -9,7 +9,7 @@
 # Copilot 指令
 
 ## 项目概述
-这是一个基于 Flutter 的项目，旨在实现 RAG (Retrieval Augmented Generation) PRO 功能。
+这是一个基于 Flutter 的项目，旨在实现 RAG (Retrieval Augmented Generation)功能（AI根据项目中的文件 生成回复）。
 项目遵循 Clean Architecture 设计模式，以确保代码的可维护性、可测试性和可扩展性。
 
 ## 架构分层
@@ -32,7 +32,6 @@
 -   **`presentation`**: 表示层，负责用户界面的展示和用户交互。
     -   `pages`: (或 Screens) 页面/屏幕组件。
     -   `widgets`: 页面特有的小组件。
-    -   `bloc`: (或 Cubit/Provider/GetX Controllers) 状态管理逻辑。
 -   **`core`**: 核心工具和通用功能。
     -   `error`: 错误处理机制 (例如 Failure 类, 异常)。
     -   `di`: 依赖注入配置。

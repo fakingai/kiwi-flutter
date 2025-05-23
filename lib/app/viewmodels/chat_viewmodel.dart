@@ -183,7 +183,7 @@ class ChatViewModel extends ChangeNotifier {
             notifyListeners();
           }
           // 处理新会话事件
-          if (event.data is SSESessionData) {
+          if (_currentSession == null && event.data is SSESessionData) {
             final sessionData = event.data as SSESessionData;
             _pendingSessionKey = sessionData.sessionKey;
           }

@@ -1,6 +1,6 @@
-import 'dart:io';
 import 'dart:async';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:kiwi/domain/entities/file_entity.dart';
 import 'package:kiwi/domain/entities/cos_credentials_entity.dart';
 import 'package:kiwi/domain/entities/cos_upload_result_entity.dart';
@@ -55,7 +55,7 @@ class FileRepositoryImpl implements FileRepository {
 
   @override
   Stream<double> uploadFile({
-    required File localFile,
+    required PlatformFile localFile,
     required int projectId,
     required String fileName,
   }) async* {
@@ -87,7 +87,7 @@ class FileRepositoryImpl implements FileRepository {
         // 4. 上传完成后，上报上传结果
         try {
           // 获取文件大小和类型
-          final fileSize = await localFile.length();
+          final fileSize = localFile.size;
           final fileType = fileName.split('.').last.toLowerCase();
 
           // 上报上传结果
